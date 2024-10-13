@@ -1,0 +1,27 @@
+{% import "macros/table" %}
+
+{% extends "layout" %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block main %}
+<div class="contacts">
+    <div class="contact-list">
+        {% for c in contactList %}
+        <div {% if contact is defined and c.id == contact.id %}class="active"{% endif %}><a href="/contacts/{{ c.id }}">{{ c.name }}</a></div>
+        {% endfor %}
+    </div>
+    <div class="contact-details">
+        {% if contact is defined %}
+        <table>
+            {{ trSimple("First name", contact.firstName) }}
+            {{ trSimple("Last name", contact.lastName) }}
+            {{ trMultiline("Email addresses", contact.email) }}
+            {{ trMultiline("Phone numbers", contact.phone) }}
+        </table>
+        {% else %}
+        <p>Please select a contact</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
