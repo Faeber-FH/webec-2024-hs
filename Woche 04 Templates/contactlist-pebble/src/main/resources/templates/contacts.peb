@@ -11,7 +11,47 @@
     </header>
     <main>
         <h1>Contacts</h1>
-        <p><em>TODO</em></p>
+        <div style="display: flex">
+            <div>
+                    {% for contact in contactList  %}
+                    <a href="/contacts/{{ contact.id }}">{{ contact.name }} </a>
+                    <hr>
+                    {% endfor %}
+            </div>
+            {% if contact == null %}
+                <p>Please choose a contact.</p>
+            {% endif %}
+            {% if contact != null %}
+                <div style=" flex-direction: row; padding-left: 20px">
+                    <table style="border-collapse: collapse">
+                        <tr>
+                            <td><b>First Name: </b></td>
+                            <td>{{ contact.firstName }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Last Name:</b></td>
+                            <td>{{ contact.lastName }}</td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top"><b>Email:</b></td>
+                            <td>
+                                    {% for mail in contact.email %}
+                                    {{ mail }}<br>
+                                    {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top"><b>Phone:</b></td>
+                            <td>
+                                    {% for pii in contact.phone %}
+                                    {{ pii }}<br>
+                                    {% endfor %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
     </main>
     <footer>
         built with <a href="https://spring.io/">Spring</a>
