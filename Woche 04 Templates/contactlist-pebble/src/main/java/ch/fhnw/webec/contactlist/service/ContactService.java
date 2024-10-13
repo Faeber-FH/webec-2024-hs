@@ -2,6 +2,7 @@ package ch.fhnw.webec.contactlist.service;
 
 import ch.fhnw.webec.contactlist.model.Contact;
 import ch.fhnw.webec.contactlist.model.ContactListEntry;
+import ch.fhnw.webec.contactlist.model.ContactStatistics;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,14 @@ public class ContactService {
                 .sorted(comparing(Contact::getId))
                 .map(c -> new ContactListEntry(c.getId(), c.getFirstName() + " " + c.getLastName()))
                 .toList();
+    }
+
+    public  ContactStatistics getStatistics(){
+        ContactStatistics contactStatistics = new ContactStatistics();
+        contactStatistics.contactCount = contacts.size();
+        contactStatistics.emailCount = contacts.stream().flatMap(contact -> contact.getEmail().stream()).count();
+        contactStatistics.phoneCount = contacts.stream().flatMap(contact -> contact.getPhone().stream()).count();
+        return  contactStatistics;
     }
 
     public Optional<Contact> findContact(int id) {

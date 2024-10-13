@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ href("/style.css") }}">
+    <title>Contacts - {% block title %}{% endblock %}</title>
+</head>
+<div id="container">
+    <header>
+        <h1>{% block header %}{% endblock %}</h1>
+    </header>
+    <nav>
+        <div>
+            <a href="/" {% if request.servletPath.length == 1 %}
+               , class="active"
+            {% endif %}>Home</a>
+            <a href="/contacts" {% if request.servletPath.endsWith("contacts") %}
+               , class="active"
+            {% endif %}>Contacts</a>
+            <a href="about" {% if request.servletPath.endsWith("about") %}
+               , class="active"
+            {% endif %}>About</a>
+        </div>
+    </nav>
+    <main>
+            {% block main %}{% endblock %}
+    </main>
+    <footer>
+        built with <a href="https://spring.io/">Spring</a>
+    </footer>
+</div>
+</html>

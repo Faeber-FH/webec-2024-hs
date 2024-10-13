@@ -1,0 +1,6 @@
+{% extends "layout" %}
+    {% block title %}
+    Index
+    {% endblock %}
+    {% block header %}INDEX{% endblock %}
+{% block main %}Hellou There{% endblock %}

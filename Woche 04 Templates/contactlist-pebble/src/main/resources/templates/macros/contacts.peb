@@ -1,0 +1,13 @@
+    {% macro singleLine(label, field) %}
+    <td><b>{{ label }}:</b></td>
+    <td>{{ field }}</td>
+    {% endmacro %}
+
+    {% macro multiLine(label, field) %}
+    <td style="vertical-align: top"><b>{{ label }}:</b></td>
+    <td>
+            {% for element in field %}
+            {{ element }}<br>
+            {% endfor %}
+    </td>
+    {% endmacro %}
