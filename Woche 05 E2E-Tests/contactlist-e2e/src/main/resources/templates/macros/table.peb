@@ -1,0 +1,15 @@
+{% macro trSimple(label, value) %}
+    <tr>
+        <th>{{ label }}</th>
+        <td>{{ value }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro trMultiline(label, value) %}
+    {% if not value.isEmpty %}
+        <tr>
+            <th>{{ label }}</th>
+            <td>{% for v in value %}<div>{{ v }}</div>{% endfor %}</td>
+        </tr>
+    {% endif %}
+{% endmacro %}
