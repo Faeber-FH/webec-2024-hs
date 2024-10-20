@@ -34,6 +34,17 @@ Verwende dafür folgende Maven-Dependencies:
 
 Passe das Projekt so an, dass `mvn test` nur noch die Unit Tests ausführt. Mit `mvn verify` sollen auch die E2E tests ausgeführt werden.
 
+Wichtig: Diesmal brauchen wir ein Maven Plugin, nicht eine Maven Dependency:
+
+```
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-failsafe-plugin</artifactId>
+</plugin>
+```
+
+Damit ein Test nur in der `verify` Phase ausgeführt wird, muss er `IT` im Namen haben.
+
 Achtung: Da wir den Maven Wrapper verwenden, heissen die Befehle leicht anders (z.B. `.\mvnw.cmd test` unter Windows).
 
 
@@ -41,7 +52,7 @@ Achtung: Da wir den Maven Wrapper verwenden, heissen die Befehle leicht anders (
 
 Erstelle eine Page-Object-Klasse für die Contacts-Seite, mit Attributen für die Kontakte-Links und die Kontakt-Details.
 
-Refactore anschliessend den Test `ContactsPageIT`, sodass solche Page-Objects verwendet werden.
+Refactore anschliessend den E2E-Test, sodass solche Page-Objects verwendet werden.
 
 
 ## Übung Suchfeld und Kontakte filtern

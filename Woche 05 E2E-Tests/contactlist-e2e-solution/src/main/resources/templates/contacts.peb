@@ -1,0 +1,45 @@
+{% import "macros/table" %}
+
+{% extends "layout" %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block main %}
+<form action="/contacts" method="get" class="search">
+    <input type="text" name="query" class="search-query" data-se="search-query" minlength="{{minQueryLength}}" required
+           placeholder="Search ..."{% if query is defined %} value="{{ query }}"{% endif %}>
+    <input type="submit" value="Search" class="button button-primary" data-se="search-submit">
+    {% if query is defined %}
+    <a href="/contacts" class="button button-secondary block" data-se="search-reset">Reset</a>
+    {% endif %}
+</form>
+<div class="contacts">
+    <div class="contact-list">
+        {% for c in contactList %}
+        <div data-se="contact-entry" {% if contact is defined and c.id == contact.id %}class="active"{% endif %}>
+            <a href="/contacts/{{ c.id }}{% if query is defined %}?query={{ query }}{% endif %}">{{ c.name }}</a>
+        </div>
+        {% endfor %}
+        {% if contactList.size() == 0 %}
+            <p data-se="no-results">No results</p>
+        {% endif %}
+    </div>
+    <div class="contact-details" data-se="contact-details">
+        {% if contact is defined %}
+        <table>
+            {{ trSimple("First name", contact.firstName) }}
+            {{ trSimple("Last name", contact.lastName) }}
+            {{ trMultiline("Email addresses", contact.email) }}
+            {{ trMultiline("Phone numbers", contact.phone) }}
+        </table>
+        {% else %}
+            {% if error is defined %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            {% if contactList.size() > 0 %}
+                <p>Please select a contact</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
