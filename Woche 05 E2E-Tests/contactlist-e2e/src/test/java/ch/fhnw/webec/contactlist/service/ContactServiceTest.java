@@ -68,4 +68,54 @@ class ContactServiceTest {
         var contact = service.findContact(98213);
         assertTrue(contact.isEmpty());
     }
+
+
+    @Test
+    void searchContactListByFirstName() {
+        List<ContactListEntry> results = service.searchContactList("Mabel");
+        assertEquals(1, results.size());
+        assertEquals("Mabel Guppy", results.get(0).getName());
+    }
+
+    @Test
+    void searchContactListByLastName() {
+        List<ContactListEntry> results = service.searchContactList("Clouter");
+        assertEquals(1, results.size());
+        assertEquals("Lauree Clouter", results.get(0).getName());
+    }
+
+    @Test
+    void searchContactListByEmail() {
+        List<ContactListEntry> results = service.searchContactList("alyman0@economist.com");
+        assertEquals(1, results.size());
+        assertEquals("Lauree Clouter", results.get(0).getName());
+    }
+
+    @Test
+    void searchContactListByPartialEmail() {
+        List<ContactListEntry> results = service.searchContactList("economist.com");
+        assertEquals(1, results.size());
+        assertEquals("Lauree Clouter", results.get(0).getName());
+    }
+
+    @Test
+    void searchContactListByPhoneNumber() {
+        List<ContactListEntry> results = service.searchContactList("405-580-6403");
+        assertEquals(1, results.size());
+        assertEquals("Mabel Guppy", results.get(0).getName());
+    }
+
+    @Test
+    void searchContactListByPartialPhoneNumber() {
+        List<ContactListEntry> results = service.searchContactList("580");
+        assertEquals(1, results.size());
+        assertEquals("Mabel Guppy", results.get(0).getName());
+    }
+
+    @Test
+    void searchContactListNoResults() {
+        List<ContactListEntry> results = service.searchContactList("NonExistent");
+        assertTrue(results.isEmpty());
+    }
+
 }

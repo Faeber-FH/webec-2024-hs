@@ -10,17 +10,33 @@ import java.util.Optional;
 
 public class FormPage {
     public FormPage(WebDriver driver, int port) {
-        driver.navigate().to("http://localhost:" + port + "/");
+        driver.navigate().to("http://localhost:" + port + "/contacts");
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "inches")
-    private List<WebElement> inchesField;
-    @FindBy(css = "input[type=submit]")
-    private List<WebElement> submitButton;
+    @FindBy(css = "[data-se=contact-entry]")
+    private List<WebElement> linkEntries;
+    @FindBy(css = "[data-se=contact-details]")
+    private WebElement contactDetails;
+    @FindBy(css = "[data-se=search-field]")
+    private WebElement searchField;
+    @FindBy(css = "[data-se=search-button]")
+    private WebElement searchButton;
 
-    public Optional<WebElement> getInchesField() {
-        return inchesField.stream().findFirst();
+
+    public List<WebElement> getLinkEntries() {
+        return linkEntries;
     }
 
+    public WebElement getContactDetails() {
+        return contactDetails;
+    }
+
+    public WebElement getSearchButton() {
+        return searchButton;
+    }
+
+    public WebElement getSearchField() {
+        return searchField;
+    }
 }

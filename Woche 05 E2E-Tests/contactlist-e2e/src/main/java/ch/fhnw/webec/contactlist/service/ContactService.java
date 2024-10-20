@@ -25,9 +25,9 @@ public class ContactService {
 
     public ContactStatistics getContactStatistics() {
         return new ContactStatistics(
-          contacts.size(),
-          contacts.stream().mapToInt(x -> x.getPhone().size()).sum(),
-          contacts.stream().mapToInt(x -> x.getEmail().size()).sum()
+                contacts.size(),
+                contacts.stream().mapToInt(x -> x.getPhone().size()).sum(),
+                contacts.stream().mapToInt(x -> x.getEmail().size()).sum()
         );
     }
 
@@ -50,5 +50,17 @@ public class ContactService {
     public Contact add(Contact contact) {
         contacts.add(contact);
         return contact; // important for later, when using Repository
+    }
+
+    public List<ContactListEntry> searchContactList(String search) {
+        return contacts.stream()
+                .filter(contact -> contact.getFirstName().toLowerCase().contains(search.toLowerCase()) ||
+                        contact.getLastName().toLowerCase().contains(search.toLowerCase()) ||
+                        contact.getEmail().stream().anyMatch(s -> s.toLowerCase().contains(search.toLowerCase())) ||
+                        contact.getPhone().stream().anyMatch(s -> s.toLowerCase().contains(search.toLowerCase()))
+                )
+                .sorted(comparing(Contact::getId))
+                .map(c -> new ContactListEntry(c.getId(), c.getFirstName() + " " + c.getLastName()))
+                .toList();
     }
 }

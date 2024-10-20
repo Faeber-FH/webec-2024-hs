@@ -1,6 +1,7 @@
 package ch.fhnw.webec.contactlist.controller;
 
 import ch.fhnw.webec.contactlist.service.ContactService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,21 +16,33 @@ public class ContactsController {
 
     private final ContactService service;
 
+    @Value("${contactlist.min-query-length}")
+    private int minQueryLength;
+
     public ContactsController(ContactService service) {
         this.service = service;
     }
 
     @GetMapping("contacts")
-    public String contacts(Model model) {
-        model.addAttribute("contactList", service.getContactList());
+    public String contacts(String search, Model model) {
+        if (search != null && !search.isEmpty()) {
+            model.addAttribute("contactList", service.searchContactList(search));
+        } else {
+            model.addAttribute("contactList", service.getContactList());
+        }
+        model.addAttribute("minQueryLength", minQueryLength);
         return "contacts";
     }
 
     @GetMapping("contacts/{id}")
-    public String showContact(@PathVariable int id, Model model) {
+    public String showContact(@PathVariable int id,String search, Model model) {
         var contact = service.findContact(id).orElseThrow(ContactNotFound::new);
-        model.addAttribute("contactList", service.getContactList());
-        model.addAttribute("contact", contact);
+        if (search != null && !search.isEmpty() && search.length()>=minQueryLength) {
+            model.addAttribute("contactList", service.searchContactList(search));
+        } else {
+            model.addAttribute("contactList", service.getContactList());
+        }        model.addAttribute("contact", contact);
+        model.addAttribute("minQueryLength", minQueryLength);
         return "contacts";
     }
 
@@ -41,5 +54,6 @@ public class ContactsController {
         return "contacts";
     }
 
-    private static class ContactNotFound extends RuntimeException {}
+    private static class ContactNotFound extends RuntimeException {
+    }
 }

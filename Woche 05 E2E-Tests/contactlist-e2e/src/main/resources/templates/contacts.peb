@@ -1,30 +1,41 @@
-{% import "macros/table" %}
+    {% import "macros/table" %}
+        {% set search = request.getParameter("search") %}
+        {% extends "layout" %}
 
-{% extends "layout" %}
+        {% block title %}Contacts{% endblock %}
 
-{% block title %}Contacts{% endblock %}
-
-{% block main %}
-<div class="contacts">
-    <div class="contact-list">
-        {% for c in contactList %}
-        <div {% if contact is defined and c.id == contact.id %}class="active"{% endif %}><a href="/contacts/{{ c.id }}">{{ c.name }}</a></div>
-        {% endfor %}
-    </div>
-    <div class="contact-details">
-        {% if contact is defined %}
-        <table>
-            {{ trSimple("First name", contact.firstName) }}
+    {% block main %}
+    <div class="contacts">
+        <div>
+            <form action="/contacts">
+                <label for="searchfiled">Search:</label><br>
+                <input data-se="search-field" minlength="{{ minQueryLength }}" type="text" id="searchfiled" name="search"><br>
+                <input data-se="search-button" type="submit" value="Search">
+            </form>
+        </div>
+        <div class="contact-list">
+                {% for c in contactList %}
+                <div data-se="contact-entry"
+                     {% if contact is defined and c.id == contact.id %}class="active"{% endif %}><a
+                        href="/contacts/{{ c.id }}{% if search != null %}
+?search={{ search }}
+                        {% endif %}">{{ c.name }}</a></div>
+                {% endfor %}
+        </div>
+        <div class="contact-details">
+                {% if contact is defined %}
+                <table data-se="contact-details">
+                    {{ trSimple("First name", contact.firstName) }}
             {{ trSimple("Last name", contact.lastName) }}
             {{ trMultiline("Email addresses", contact.email) }}
             {{ trMultiline("Phone numbers", contact.phone) }}
-        </table>
-        {% else %}
-            {% if error is defined %}
-                <p class="error">{{ error }}</p>
-            {% endif %}
-            <p>Please select a contact</p>
-        {% endif %}
+                </table>
+                {% else %}
+                {% if error is defined %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+                <p>Please select a contact</p>
+                {% endif %}
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
