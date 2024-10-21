@@ -46,6 +46,14 @@ public class ContactsController {
         return "contacts";
     }
 
+    @GetMapping("contacts/{id}/edit")
+    public String editContact(@PathVariable int id, String query, Model model) {
+        var contact = service.findContact(id).orElseThrow(ContactNotFound::new);
+        model.addAttribute("contact", contact);
+        contacts(query, model);
+        return "contacts";
+    }
+
     @ExceptionHandler(ContactNotFound.class)
     @ResponseStatus(NOT_FOUND)
     public String notFound(Model model) {

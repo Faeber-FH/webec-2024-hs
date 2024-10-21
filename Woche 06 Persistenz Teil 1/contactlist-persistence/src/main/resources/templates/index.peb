@@ -1,7 +1,18 @@
-{% extends "layout" %}
+    {% extends "layout" %}
 
-{% block title %}Home{% endblock %}
+        {% block title %}Home{% endblock %}
 
-{% block main %}
+    {% block main %}
 <p> Welcome to the Contact List app.</p>
+            <form action="/request">
+                <label for="firstname">Vorname:</label><br>
+                <input type="text" id="firstname" name="firstname"><br>
+                <label for="lastname">Nachname:</label><br>
+                <input type="text" id="lastname" name="lastname"><br>
+                <label for="jobtitle">Jobtitel:</label><br>
+                <input type="text" id="jobtitle" name="jobtitle"><br>
+                <label for="company">Firma:</label><br>
+                <input type="text" id="company" name="company"><br>
+                <input data-se="search-button" type="submit" value="Search">
+            </form>
 {% endblock %}

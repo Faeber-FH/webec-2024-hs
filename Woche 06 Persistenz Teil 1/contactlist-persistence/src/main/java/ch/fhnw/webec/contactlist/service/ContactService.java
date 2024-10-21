@@ -2,6 +2,7 @@ package ch.fhnw.webec.contactlist.service;
 
 import ch.fhnw.webec.contactlist.model.Contact;
 import ch.fhnw.webec.contactlist.model.ContactListEntry;
+import ch.fhnw.webec.contactlist.model.ContactRepository;
 import ch.fhnw.webec.contactlist.model.ContactStatistics;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +15,21 @@ import static java.util.Comparator.comparing;
 @Service
 public class ContactService {
 
-    private final List<Contact> contacts = new ArrayList<>();
+    private final ContactRepository contactRepository;
+
+    public ContactService(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
 
     public List<ContactListEntry> getContactList() {
-        return contacts.stream()
+        return contactRepository.findAll().stream()
                 .sorted(comparing(Contact::getId))
                 .map(c -> new ContactListEntry(c.getId(), c.getFirstName() + " " + c.getLastName()))
                 .toList();
     }
 
     public List<ContactListEntry> searchContactList(String query) {
-        return contacts.stream()
+        return contactRepository.findAll().stream()
                 .filter(c -> c.containsString(query))
                 .sorted(comparing(Contact::getId))
                 .map(c -> new ContactListEntry(c.getId(), c.getFirstName() + " " + c.getLastName()))
@@ -33,16 +38,14 @@ public class ContactService {
 
     public ContactStatistics getContactStatistics() {
         return new ContactStatistics(
-          contacts.size(),
-          contacts.stream().mapToInt(x -> x.getPhone().size()).sum(),
-          contacts.stream().mapToInt(x -> x.getEmail().size()).sum()
+          contactRepository.findAll().size(),
+          contactRepository.findAll().stream().mapToInt(x -> x.getPhone().size()).sum(),
+          contactRepository.findAll().stream().mapToInt(x -> x.getEmail().size()).sum()
         );
     }
 
     public Optional<Contact> findContact(int id) {
-        return contacts.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst();
+        return contactRepository.findById(id);
     }
 
     public Contact add(String firstName, String lastName,
@@ -56,7 +59,7 @@ public class ContactService {
     }
 
     public Contact add(Contact contact) {
-        contacts.add(contact);
+        contactRepository.save(contact);
         return contact; // important for later, when using Repository
     }
 }

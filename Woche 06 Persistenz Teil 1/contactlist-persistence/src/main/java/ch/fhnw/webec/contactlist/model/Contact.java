@@ -1,23 +1,29 @@
 package ch.fhnw.webec.contactlist.model;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 import java.util.List;
 
+@Entity
 public class Contact {
 
+    @Id
+    @GeneratedValue
     private int id;
     private String firstName;
     private String lastName;
+    @ElementCollection
     private List<String> email;
+    @ElementCollection
     private List<String> phone;
     private String jobTitle;
     private String company;
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {

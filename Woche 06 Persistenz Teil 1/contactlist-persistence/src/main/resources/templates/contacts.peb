@@ -32,6 +32,7 @@
             {{ trMultiline("Email addresses", contact.email) }}
             {{ trMultiline("Phone numbers", contact.phone) }}
         </table>
+            <a href="/contacts/{{ contact.id }}/edit" class="button button-primary">Edit</a>
         {% else %}
             {% if error is defined %}
                 <p class="error">{{ error }}</p>
