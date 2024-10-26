@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/Woche 04 Templates/contactlist-pebble/pom.xml" />
         <option value="$PROJECT_DIR$/Woche 05 E2E-Tests/contactlist-e2e/pom.xml" />
+        <option value="$PROJECT_DIR$/Woche 06 Persistenz Teil 1/contactlist-persistence/pom.xml" />
       </list>
     </option>
   </component>

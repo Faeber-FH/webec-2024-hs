@@ -13,6 +13,6 @@
                 <input type="text" id="jobtitle" name="jobtitle"><br>
                 <label for="company">Firma:</label><br>
                 <input type="text" id="company" name="company"><br>
-                <input data-se="search-button" type="submit" value="Search">
+                <input data-se="add-button" type="submit" value="Add">
             </form>
 {% endblock %}

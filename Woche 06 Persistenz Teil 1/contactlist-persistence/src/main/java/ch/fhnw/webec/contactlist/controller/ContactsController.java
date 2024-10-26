@@ -35,6 +35,7 @@ public class ContactsController {
             model.addAttribute("contactList", service.getContactList());
         }
         model.addAttribute("minQueryLength", minQueryLength);
+        model.addAttribute("isInEdit", false);
         return "contacts";
     }
 
@@ -43,6 +44,7 @@ public class ContactsController {
         var contact = service.findContact(id).orElseThrow(ContactNotFound::new);
         model.addAttribute("contact", contact);
         contacts(query, model);
+        model.addAttribute("isInEdit", false);
         return "contacts";
     }
 
@@ -51,6 +53,7 @@ public class ContactsController {
         var contact = service.findContact(id).orElseThrow(ContactNotFound::new);
         model.addAttribute("contact", contact);
         contacts(query, model);
+        model.addAttribute("isInEdit", true);
         return "contacts";
     }
 

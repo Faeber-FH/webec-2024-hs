@@ -1,46 +1,68 @@
-{% import "macros/table" %}
+    {% import "macros/table" %}
 
-{% extends "layout" %}
+        {% extends "layout" %}
 
-{% block title %}Contacts{% endblock %}
+        {% block title %}Contacts{% endblock %}
 
-{% block main %}
-<form action="/contacts" method="get" class="search">
-    <input type="text" name="query" class="search-query" data-se="search-query" minlength="{{minQueryLength}}" required
-           placeholder="Search ..."{% if query is defined %} value="{{ query }}"{% endif %}>
-    <input type="submit" value="Search" class="button button-primary" data-se="search-submit">
-    {% if query is defined %}
-    <a href="/contacts" class="button button-secondary block" data-se="search-reset">Reset</a>
-    {% endif %}
-</form>
-<div class="contacts">
-    <div class="contact-list">
-        {% for c in contactList %}
-        <div data-se="contact-entry" {% if contact is defined and c.id == contact.id %}class="active"{% endif %}>
-            <a href="/contacts/{{ c.id }}{% if query is defined %}?query={{ query }}{% endif %}">{{ c.name }}</a>
-        </div>
-        {% endfor %}
-        {% if contactList.size() == 0 %}
-            <p data-se="no-results">No results</p>
+    {% block main %}
+    <form action="/contacts" method="get" class="search">
+        <input type="text" name="query" class="search-query" data-se="search-query" minlength="{{minQueryLength}}"
+               required
+               placeholder="Search ..."{% if query is defined %} value="{{ query }}"{% endif %}>
+        <input type="submit" value="Search" class="button button-primary" data-se="search-submit">
+        {% if query is defined %}
+            <a href="/contacts" class="button button-secondary block" data-se="search-reset">Reset</a>
         {% endif %}
-    </div>
-    <div class="contact-details" data-se="contact-details">
-        {% if contact is defined %}
-        <table>
-            {{ trSimple("First name", contact.firstName) }}
+    </form>
+    <div class="contacts">
+        <div class="contact-list">
+            {% for c in contactList %}
+                <div data-se="contact-entry"
+                     {% if contact is defined and c.id == contact.id %}class="active"{% endif %}>
+                    <a href="/contacts/{{ c.id }}{% if query is defined %}?query={{ query }}{% endif %}">{{ c.name }}</a>
+                </div>
+            {% endfor %}
+            {% if contactList.size() == 0 %}
+                <p data-se="no-results">No results</p>
+            {% endif %}
+        </div>
+        <div class="contact-details" data-se="contact-details">
+                {% if contact is defined and not isInEdit %}
+                <table>
+                    {{ trSimple("First name", contact.firstName) }}
             {{ trSimple("Last name", contact.lastName) }}
             {{ trMultiline("Email addresses", contact.email) }}
             {{ trMultiline("Phone numbers", contact.phone) }}
-        </table>
-            <a href="/contacts/{{ contact.id }}/edit" class="button button-primary">Edit</a>
-        {% else %}
-            {% if error is defined %}
-                <p class="error">{{ error }}</p>
-            {% endif %}
-            {% if contactList.size() > 0 %}
-                <p>Please select a contact</p>
-            {% endif %}
-        {% endif %}
+            {{ trSimple("Job", contact.jobTitle) }}
+            {{ trSimple("Company", contact.company) }}
+                </table>
+                <a href="/contacts/{{ contact.id }}/edit" class="button button-primary">Edit</a>
+                <form action="/delete" method="post" style="display:inline;">
+                    <input type="hidden" name="contactId" value="{{ contact.id }}">
+                    <input type="submit" value="Delete" class="button button-danger">
+                </form>
+                {% else %}
+                {% if error is defined %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+                {% if contactList.size() > 0 %}
+                    <p>Please select a contact</p>
+                {% endif %}
+                {% if isInEdit %}
+                    <form action="/edit">
+                        <input type="hidden" id="contactId" name="contactId" value="{{ contact.id }}">
+                        <label for="firstname">Vorname:</label><br>
+                        <input type="text" id="firstname" name="firstname" value="{{ contact.firstName }}"><br>
+                        <label for="lastname">Nachname:</label><br>
+                        <input type="text" id="lastname" name="lastname" value="{{ contact.lastName }}"><br>
+                        <label for="jobtitle">Jobtitel:</label><br>
+                        <input type="text" id="jobtitle" name="jobtitle" value="{{ contact.jobTitle }}"><br>
+                        <label for="company">Firma:</label><br>
+                        <input type="text" id="company" name="company" value="{{ contact.company }}"><br>
+                        <input data-se="add-button" type="submit" value="Edit">
+                    </form>
+                {% endif %}
+                {% endif %}
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

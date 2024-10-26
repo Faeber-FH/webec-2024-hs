@@ -62,4 +62,8 @@ public class ContactService {
         contactRepository.save(contact);
         return contact; // important for later, when using Repository
     }
+
+    public void delete(Contact contact) {
+        contactRepository.delete(contact);
+    }
 }
