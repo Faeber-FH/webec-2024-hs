@@ -1,0 +1,25 @@
+{% import "macros/nav" %}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="{{ href("/style.css") }}">
+	<title>Contact List - {% block title %}{% endblock %}</title>
+</head>
+<div id="container">
+	<nav>
+		{{ nav("/", "Home", request) }}
+		{{ nav("/contacts", "Contacts", request) }}
+		{{ nav("/about", "About", request) }}
+	</nav>
+	<main>
+		<h1>{% block title %}Contact List{% endblock %}</h1>
+
+		{% block main %}{% endblock %}
+	</main>
+	<footer>
+		sample solution week 6
+	</footer>
+</div>
+</html>

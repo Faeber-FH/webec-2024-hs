@@ -56,7 +56,7 @@ Die Tabellen sollten jetzt gefüllt worden sein.
 
 Füge ein Formular zur Web-App hinzu, mit welchem man neue Kontakte erstellen kann. Füge vorerst mal nur Felder für Vorname, Nachname, Jobtitel und Firma hinzu. Verlinke das Formular auf der Contacts-Startseite.
 
-Implementiere einen neuen Controller, welcher beim Abschicken des Formulars aufgerufen wird. Rufe vom Controller die `ContactService.add()`-Methode auf, um einen neuen Kontakt in der Datenbank zu speichern. Danach soll die Seite mit den Details des soeben hinzugefügten Kontakts angezeigt werden.
+Implementiere eine neue Controller-Methode, welche beim Abschicken des Formulars aufgerufen wird. Rufe vom Controller die `ContactService.add()`-Methode auf, um einen neuen Kontakt in der Datenbank zu speichern. Danach soll die Seite mit den Details des soeben hinzugefügten Kontakts angezeigt werden.
 
 **Hinweis:** Mit `return "redirect:/[url]"` kann man in einem Controller einen Status `302` zurückgeben, der den Browser auf die Seite unter `/[url]` weiterleitet.
 

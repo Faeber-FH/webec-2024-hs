@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
-@Validated
 public class ContactsController {
 
     private final ContactService service;
