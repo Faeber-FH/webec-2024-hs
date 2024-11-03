@@ -1,0 +1,32 @@
+{% macro trSimple(label, value, edit, name) %}
+	<tr>
+		<th>{{ label }}</th>
+		<td data-se="{{ name }}">
+			{% if edit is defined and edit == 1 %}
+				<input type="text" name="{{ name }}" {% if value is defined %}value="{{ value }}"{% endif %}>
+			{% else %}
+				{{ value }}
+			{% endif %}
+		</td>
+	</tr>
+{% endmacro %}
+
+
+{% macro trMultiline(label, value, edit, name) %}
+	{% if value is defined and (value|length > 1) %}
+		<tr>
+			<th>{{ label }}</th>
+			<td data-se="{{ name }}">
+				{% for v in value %}
+					<div>
+						{% if edit is defined and edit == 1 %}
+							<input type="text" name="{{ name }}[{{ loop.index }}]"{% if v is defined %}value="{{ v }}"{% endif %}>
+						{% else %}
+							{{ v }}
+						{% endif %}
+					</div>
+				{% endfor %}
+			</td>
+		</tr>
+	{% endif %}
+{% endmacro %}

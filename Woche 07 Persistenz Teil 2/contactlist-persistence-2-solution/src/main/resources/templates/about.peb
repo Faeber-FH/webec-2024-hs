@@ -1,0 +1,20 @@
+{% import "macros/table" %}
+
+{% extends "layout" %}
+
+{% block title %}About{% endblock %}
+
+{% block main %}
+<p>
+    Exercise app for the Web Engineering lecture at
+    <a href="https://www.fhnw.ch/de/die-fhnw/hochschulen/ht" target="_blank">Hochschule für Technik FHNW</a>.
+</p>
+<h2>
+    Statistics
+</h2>
+<table>
+    {{ trSimple("Contacts", statistics.contactCount, 0) }}
+    {{ trSimple("Phone numbers", statistics.phoneNumberCount, 0) }}
+    {{ trSimple("Email addresses", statistics.emailAddressCount, 0) }}
+</table>
+{% endblock %}

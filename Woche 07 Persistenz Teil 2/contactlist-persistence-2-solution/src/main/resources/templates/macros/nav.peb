@@ -1,0 +1,8 @@
+{% macro nav(href, title, request) %}
+	<div>
+		<a href="{{ href }}"{% if request.servletPath == href or (href.length > 1 and request.servletPath.startsWith(href)) %}
+			class="active"{% endif %}>
+			{{title}}
+		</a>
+	</div>
+{% endmacro %}
