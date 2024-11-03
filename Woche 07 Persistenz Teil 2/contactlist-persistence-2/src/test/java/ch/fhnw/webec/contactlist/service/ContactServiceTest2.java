@@ -8,28 +8,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.opentest4j.AssertionFailedError;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static java.util.Collections.emptyList;
 import static java.util.stream.IntStream.rangeClosed;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ContactServiceTest {
+@DataJpaTest
+class ContactServiceTest2 {
 
     ContactService service;
 
-    ContactServiceTest() throws IOException {
+    @Autowired
+    ContactServiceTest2(ContactRepository contactRepository) throws IOException {
         var mapper = new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        var sampleContacts = SampleContactsAdder.loadSampleContacts(mapper);
         var stub = Mockito.mock(ContactRepository.class);
-        Mockito.when(stub.findAll()).thenReturn(sampleContacts);
-        Mockito.when(stub.findById(1)).thenReturn(Optional.ofNullable(sampleContacts.get(0)));
-
         service = new ContactService(stub);
         new SampleContactsAdder(mapper, service).addSampleContacts();
     }

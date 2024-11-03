@@ -1,16 +1,23 @@
 package ch.fhnw.webec.wishlist.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
-
+@Entity
 public class Wishlist {
-
+@Id
     private Integer id;
     private String name;
     private LocalDate createdDate;
+    @OneToMany
+    @JoinColumn(name = "WISHLIST_ID")
     private List<Wish> entries = new ArrayList<>();
 
     protected Wishlist() {} // for JSON deserialization (and later JPA)

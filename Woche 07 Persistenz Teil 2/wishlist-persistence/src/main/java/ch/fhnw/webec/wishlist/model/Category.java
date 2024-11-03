@@ -1,11 +1,16 @@
 package ch.fhnw.webec.wishlist.model;
 
-public class Category {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Category {
+    @Id
     private Integer id;
     private String name;
 
-    protected Category() {} // for JSON deserialization (and later JPA)
+    protected Category() {
+    } // for JSON deserialization (and later JPA)
 
     public Category(String name) {
         this.name = name;

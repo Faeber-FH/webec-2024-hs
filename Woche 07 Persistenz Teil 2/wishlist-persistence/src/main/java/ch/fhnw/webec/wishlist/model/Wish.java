@@ -1,5 +1,8 @@
 package ch.fhnw.webec.wishlist.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -7,9 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Comparator.comparing;
-
+@Entity
 public class Wish {
-
+@Id
     private Integer id;
     private String description;
     private String url;
