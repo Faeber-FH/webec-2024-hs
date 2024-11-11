@@ -1,0 +1,38 @@
+package ch.fhnw.webec.wishlist.model;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Category {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+    private String name;
+
+    protected Category() {} // for JSON deserialization (and later JPA)
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return name;
+    }
+}

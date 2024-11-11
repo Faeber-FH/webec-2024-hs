@@ -1,0 +1,5 @@
+{% macro csrf(request) %}
+<input type="hidden"
+    name="{{ request.getAttribute("_csrf").parameterName }}"
+    value="{{ request.getAttribute("_csrf").token }}">
+{% endmacro %}

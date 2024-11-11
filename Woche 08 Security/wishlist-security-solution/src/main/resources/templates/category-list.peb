@@ -1,0 +1,49 @@
+{# @pebvariable name="categories" type="java.util.List<ch.fhnw.webec.wishlist.model.Category>" #}
+{# @pebvariable name="wishCounts" type="java.util.Map<ch.fhnw.webec.wishlist.model.Category, java.util.Long>" #}
+
+{% import "makros" %}
+
+{% extends "layout" %}
+
+{% block title %}Categories{% endblock %}
+
+{% block main%}
+<main>
+    <h1>Categories</h1>
+    {% if categories.empty %}
+        <p>No categories created yet. Create one!</p>
+    {% else %}
+        <table class="nice">
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    {% set count = wishCounts.get(category) %}
+                    <td>{{ count }} wish{{ count != 1 ? "es" : "" }}</td>
+                    {% if request.isUserInRole("EDITOR") %}
+                    <td style="width: 0">
+                        {% if wishCounts.get(category) == 0 %}
+                        <form action="{{ href("/category/delete") }}" method="post">
+                            {{ csrf(request) }}
+                            <input type="hidden" name="id" value="{{ category.id }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    {% if request.isUserInRole("EDITOR") %}
+    <h3>Create a new category</h3>
+    <form action="{{ href("/category/create") }}" method="post">
+        {{ csrf(request) }}
+        <p>
+            <input type="text" name="name" required pattern=".*\S.*"
+                   placeholder="Name of the new category">
+            <button type="submit">Create</button>
+        </p>
+    </form>
+    {% endif %}
+</main>
+{% endblock %}
