@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
+
+/* Structure */
+body {
+	font-family: 'Krub', sans-serif;
+	font-size: 120%;
+	margin: 0;
+	background-color: whitesmoke;
+	line-height: 1.6;
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		font-size: 100%;
+	}
+}
+
+#container {
+	max-width: 800px;
+	margin: 3em auto 1em auto;
+}
+
+header, footer {
+	text-align: center;
+}
+
+main {
+	margin: 0 0 1em 0;
+	padding: 3em 2em 2em 2em;
+	background: white;
+	box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+main > :last-child {
+	margin-bottom: 0;
+}
+
+/* Navigation */
+nav {
+	/* positioning / outer layout */
+	position: relative;
+	margin: 1em auto -22px auto;
+
+	/* inner layout */
+	display: flex;
+	justify-content: center;
+	width: 45%;
+	min-width: 350px;
+
+	padding: 0.3em;
+	background: white;
+	box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.20);
+
+	div {
+		padding: 0.2em;
+	}
+
+	div + div {
+		margin-left: 1.5em;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	nav {
+		width: 100%;
+	}
+}
+
+footer {
+	font-size: 80%;
+	color: #737373;
+	margin-bottom: 2em;
+}
+
+/* Headings and paragraphs */
+h1 {
+	/* font-size: clamp(300%, 12vw, 400%); */
+	font-size: min(12vw, 400%);
+	font-weight: 200;
+	color: crimson;
+}
+
+h2 {
+	font-size: 120%;
+
+	a.button {
+		padding: 4px 10px;
+		vertical-align: text-top;
+	}
+}
+
+h3 {
+	font-size: 100%;
+}
+
+h2, h3 {
+	margin-bottom: 0.5em;
+	color: #404040;
+}
+
+/* Links */
+a {
+	color: #8677c7;
+}
+
+a:hover {
+	color: #644cd3;
+}
+
+.active a, a.active {
+	color: #3e25a6;
+	font-weight: bold;
+}
+
+a:not(:hover) {
+	text-decoration: none;
+}
+
+/* Tables */
+table {
+	border-collapse: collapse;
+
+	&.form {
+		width: 100%;
+
+		th {
+			width: 40%;
+		}
+	}
+
+	input[type=text] {
+		width: 100%;
+	}
+}
+
+th {
+	font-weight: bold;
+	color: #6e6e6e;
+	text-align: left;
+}
+
+th, td {
+	padding: 0 2em 0 0;
+	word-break: break-word;
+	vertical-align: top;
+
+	&:last-child {
+		padding: 0;
+	}
+}
+
+
+@media screen and (max-width: 800px) {
+	tr {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 0.5em;
+	}
+}
+
+
+/* Error */
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+/* Utilities */
+
+.block {
+	display: block;
+}
+
+.mt-0 {
+	margin-top: 0;
+}
+
+.ml-1 {
+	margin-left: 5px;
+}
+
+/* Forms and buttons */
+
+input, a.button {
+	font-size: 1rem;
+	font-family: 'Krub', sans-serif;
+	font-weight: normal;
+	box-sizing: border-box;
+	border: #aaaaaa 1px solid;
+	border-radius: 4px;
+	padding: 6px 10px;
+}
+
+.button, a.button {
+	color: #000000;
+	cursor: pointer;
+	background-color: #cfe7ff;
+	border: none;
+	height: initial;
+
+	&:hover {
+		text-decoration: none;
+		background-color: #97cbff;
+		color: #FFFFFF;
+	}
+
+	&.button-primary {
+		background-color: #8d9ced;
+		color: #FFFFFF;
+
+		&:hover {
+			text-decoration: none;
+			background-color: #7283ed;
+			color: #FFFFFF;
+		}
+	}
+
+	&.button-danger {
+		background-color: #eca09f;
+
+		&:hover {
+			background-color: #c87877;
+			color: #FFFFFF;
+		}
+	}
+}
+
+a.add {
+	color: #7fcc71;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+form.edit input[type=text] {
+	margin-bottom: 8px;
+	padding: 3px 5px;
+}
+
+/* Contacts */
+.search {
+	display: flex;
+	margin-bottom: 1em;
+	gap: 10px;
+
+	.search-query {
+		min-width: 100px;
+		flex: 1 1 auto;
+	}
+}
+
+.contacts {
+	display: flex;
+	gap: 2em;
+
+	.contact-list {
+		flex: 0 0 200px;
+	}
+
+	.contact-details {
+		flex: 1 0 auto;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.contacts {
+		flex-direction: column-reverse;
+		gap: 1em;
+	}
+}

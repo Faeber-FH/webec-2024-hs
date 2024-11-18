@@ -1,0 +1,132 @@
+<html>
+<head lang="en">
+	<title>CSS Print Layout</title>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+		html {
+			font-family: Helvetica, sans-serif;
+			text-align: center;
+			font-size: clamp(16px, 2vw, 20px);
+			padding: 3rem;
+		}
+
+		footer {
+			margin-top: 3rem;
+			font-size: 0.8rem;
+			color: rgba(0, 0, 0, 0.7);
+		}
+
+		img {
+			opacity: 0.3;
+			max-width: 100%;
+			margin: 2rem 0;
+		}
+
+		ul {
+			display: inline-block;
+			text-align: left;
+		}
+
+		.quote {
+			font-size: clamp(1.2rem, 3vw, 1.5rem);
+			color: #0a3b87;
+			margin: 2rem;
+			line-height: 1.5;
+		}
+
+		/* make the embedded video responsive (instead of fixed size)
+		   from https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed */
+		.video-container {
+			position: relative;
+			width: 100%;
+			max-width: 1000px;
+			margin: 0 auto;
+			height: 0;
+			padding-bottom: 56.25%;
+		}
+
+		.video {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		/* special layout for print and small screens */
+		.show-print {
+			display: none;
+		}
+
+		@media print {
+			.hide-print {
+				display: none;
+			}
+
+			.show-print {
+				display: block;
+			}
+		}
+
+		@media screen and (max-width: 500px) {
+			.hide-small-screen {
+				display: none
+			}
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>Responsive and Print Layout</h1>
+		<p>
+			Some content does not work well on printers or on small devices and has to be
+			either hidden or replaced with optimized content. On this page, you can see some
+			examples:
+		</p>
+		<div>
+			<ul>
+				<li>Decorative elements are hidden for printing and on small devices</li>
+				<li>The video is hidden for printing, but still shown on small devices</li>
+				<li>Instead of the video we show the full URL for printing</li>
+			</ul>
+		</div>
+		<p>
+			Press CTRL+P to see the print layout in the print preview.
+		</p>
+
+		<h1>Some Philosophical Content</h1>
+
+		<h2>A) The Philosophy of Logical Atomism (1918&#8209;19)</h2>
+		<p>By Bertrand Russell</p>
+
+		<div class="hide-small-screen hide-print"><img src="frame-top.png" alt="decorative element"></div>
+
+		<div class="quote">
+			Everything is vague to a degree you do not realize till you have tried to make it precise,
+			and everything precise is so remote from everything that we normally think,
+			that you cannot for a moment suppose that is what we really mean when we say what we think.
+		</div>
+
+		<div class="hide-small-screen hide-print"><img src="frame-bottom.png" alt="decorative element"></div>
+
+		<h2>B) Exact Instructions Challenge</h2>
+
+		<p>By Josh Gaines a.k.a. Josh Darnit</p>
+
+		<div class="hide-small-screen hide-print"><img src="frame-top.png" alt="decorative element"></div>
+
+		<p class="hide-print video-container">
+			<iframe src="//www.youtube.com/embed/cDA3_5982h8" frameborder="0" allowfullscreen class="video"></iframe>
+		</p>
+
+		<p class="show-print">https://www.youtube.com/watch?v=cDA3_5982h8</p>
+
+		<div class="hide-small-screen hide-print"><img src="frame-bottom.png" alt="decorative element"></div>
+	</main>
+	<footer>
+		<p>Bertrand Russell text from: <a href="https://users.drew.edu/jlenz/br-logical-atomism1.html" target="_blank">users.drew.edu/jlenz</a></p>
+		<p>Decorative images from <a href="https://www.vecteezy.com/vector-art/48186596-decorative-vintage-frames-and-borders-set-design-decoration-pattern-style-calligraphic-design-fit-for-title-element-design-frame-border-caligraphic-eps-10" target="_blank">www.vecteezy.com</a></p>
+	</footer>
+</body>
+</html>

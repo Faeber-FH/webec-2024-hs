@@ -1,0 +1,29 @@
+{% import "macros/nav" %}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="{{ href("/style.css") }}">
+	<title>Contact List - {% block title %}{% endblock %}</title>
+</head>
+<div id="container">
+	<header>
+		<h1>Contact List</h1>
+		<nav>
+			{{ nav("/", "Home", request) }}
+			{{ nav("/contacts", "Contacts", request) }}
+			{{ nav("/about", "About", request) }}
+		</nav>
+	</header>
+	<main>
+		<h2>{% block title %}Contact List{% endblock %}</h2>
+
+		{% block main %}{% endblock %}
+	</main>
+	<footer>
+		week 9 - responsive solution
+	</footer>
+</div>
+</html>
