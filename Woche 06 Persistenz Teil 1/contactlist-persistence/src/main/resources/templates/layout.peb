@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ href("/style.css") }}">
-    <title>Contact List - {% block title %}{% endblock %}</title>
+    <title>Contact List</title>
 </head>
 <div id="container">
     <header>
