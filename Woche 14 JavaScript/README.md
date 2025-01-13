@@ -38,7 +38,7 @@ if ('Hello, World!') {
 
 Im Projekt «length-converter-rest» findest du eine REST-Version des Length Converters. Vervollständige die App so, dass die Konvertierung mittels JavaScript und REST-Anfragen passiert.
 
-Erstellen dazu eine Datei 'script.js' im Ordner 'static' und ändere die 'index.html'-Datei so ab, dass dieses Script geladen wird.
+Erstelle dazu eine Datei 'script.js' im Ordner 'static' und ändere die 'index.html'-Datei so ab, dass dieses Script geladen wird.
 
 Füge in diesem Script einen Event-Handler zum «Convert»-Button hinzu, welcher die Werte aus den Textfeldern ausliest und vorerst auf der Browser-Konsole ausgibt. Prüfe mit den Developer-Tools im Browser, dass das Script funktioniert.
 
