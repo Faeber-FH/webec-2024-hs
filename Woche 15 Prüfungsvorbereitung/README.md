@@ -239,3 +239,10 @@ Klasse `Post`:
 * `public Post(String, String, User)`
 
 Schreiben Sie ein Codestück, welches die Tabellen `USER`, `USER_GROUPS` und `POST` so wie in der letzten Aufgabe dargestellt mit Daten füllt. Gehen Sie davon aus, dass zwei `JpaRepository`s namens `userRepo` und `postRepo` zur Verfügung stehen.
+
+
+### 8. REST-APIs
+
+Stellen Sie sich eine REST-API für eine Büchersammlung vor, basierend auf JSON. Bücher sind Ressourcen unter [/api/books/###](), wobei ### eine Server-generierte ID eines Buchs ist. Alle Bücher bestehen aus einem Titel, einem Autor, einem Jahr und einer Seitenzahl.
+
+Ein Client dieser API erstellt ein neues Buch und löscht das Buch anschliessend wieder. Beide Operationen sind erfolgreich. Schreiben Sie zwei HTTP(1.1)-Anfragen und die entsprechenden zwei Antworten auf, welche dabei hin- und hergeschickt werden könnten.
